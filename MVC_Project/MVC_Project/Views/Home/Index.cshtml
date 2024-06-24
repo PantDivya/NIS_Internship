@@ -1,0 +1,38 @@
+﻿@model IEnumerable<MVC_Project.Models.Employee>
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<!-- Create Employee -->
+<button>@Html.ActionLink("Create", "CreateEmployee", "Home", new { area = "" }, new { @class = "nav-link" })</button>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">S.N.</th>
+            <th scope="col">Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">Email</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Contact)</td>
+                <td>@Html.ActionLink("Update", "UpdateEmployee") @Html.ActionLink("Delete", "DeleteEmployee")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
