@@ -9,6 +9,7 @@
     <Property Name="Address" Type="varchar" MaxLength="255" />
     <Property Name="Email" Type="varchar" MaxLength="255" />
     <Property Name="Contact" Type="varchar" MaxLength="255" />
+    <Property Name="Image" Type="varchar(max)" />
   </EntityType>
   <EntityContainer Name="MVC_ProjectModelStoreContainer">
     <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />

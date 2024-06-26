@@ -12,5 +12,6 @@
     <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <Property Name="Contact" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

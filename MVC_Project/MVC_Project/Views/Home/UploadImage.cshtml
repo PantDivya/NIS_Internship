@@ -1,0 +1,20 @@
+﻿@model MVC_Project.Models.tblPhoto
+
+@{ 
+}
+
+<div class="container">
+    @*<form method="post" action="#">
+            @Html.Label("Photo")
+            <input type="file" id="image" name="image" accept="image/*" />
+
+            <input type="submit" />
+        </form>*@
+    @using (@Html.BeginForm("UploadImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.Label("Photo")
+        <input type="file" id="image" name="Image" accept="image/*" onchange="fileCheck(this);" />
+
+        <input type="submit" value="Upload" />
+    }
+</div>

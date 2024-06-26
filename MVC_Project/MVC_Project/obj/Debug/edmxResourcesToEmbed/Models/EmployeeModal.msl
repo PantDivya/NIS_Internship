@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="MVC_ProjectModel.Employee">
         <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Image" ColumnName="Image" />
           <ScalarProperty Name="Contact" ColumnName="Contact" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Address" ColumnName="Address" />
