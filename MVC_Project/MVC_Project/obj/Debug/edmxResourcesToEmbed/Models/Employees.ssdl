@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVC_ProjectModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="225" />
+    <Property Name="Province" Type="varchar" MaxLength="225" />
+    <Property Name="District" Type="varchar" MaxLength="225" />
+    <Property Name="Address" Type="varchar" MaxLength="225" />
+    <Property Name="Email" Type="varchar" MaxLength="225" />
+    <Property Name="Contact" Type="varchar" MaxLength="225" />
+    <Property Name="Gender" Type="varchar" MaxLength="225" />
+    <Property Name="Hobby" Type="varchar" MaxLength="225" />
+    <Property Name="Description" Type="varchar(max)" />
+    <Property Name="Password" Type="varchar(max)" />
+  </EntityType>
+  <EntityType Name="tblHobby">
+    <Key>
+      <PropertyRef Name="HobbyId" />
+    </Key>
+    <Property Name="HobbyId" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="isSelected" Type="bit" />
+  </EntityType>
+  <EntityType Name="tblPhoto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Location" Type="varchar(max)" />
+    <Property Name="Name" Type="varchar" MaxLength="225" />
+  </EntityType>
+  <EntityContainer Name="MVC_ProjectModel1StoreContainer">
+    <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHobby" EntityType="Self.tblHobby" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPhoto" EntityType="Self.tblPhoto" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

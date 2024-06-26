@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MVC_ProjectModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Province" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="District" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Gender" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Hobby" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="Employees" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="tblHobbies" EntityType="MVC_ProjectModel1.tblHobby" />
+    <EntitySet Name="tblPhotoes" EntityType="MVC_ProjectModel1.tblPhoto" />
+  </EntityContainer>
+  <EntityType Name="tblHobby">
+    <Key>
+      <PropertyRef Name="HobbyId" />
+    </Key>
+    <Property Name="HobbyId" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isSelected" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tblPhoto">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>

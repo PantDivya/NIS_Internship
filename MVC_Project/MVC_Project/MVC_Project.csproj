@@ -154,6 +154,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeeModal.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Employees.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employees.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Employees.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblEmployee.cs">
+      <DependentUpon>Employees.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblHobby.cs">
+      <DependentUpon>Employees.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPhoto.cs">
+      <DependentUpon>Employees.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +197,111 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\img\template\apple-touch-icon.png" />
+    <Content Include="Content\img\template\blog\blog-1.jpg" />
+    <Content Include="Content\img\template\blog\blog-2.jpg" />
+    <Content Include="Content\img\template\blog\blog-3.jpg" />
+    <Content Include="Content\img\template\blog\blog-4.jpg" />
+    <Content Include="Content\img\template\blog\blog-5.jpg" />
+    <Content Include="Content\img\template\blog\blog-6.jpg" />
+    <Content Include="Content\img\template\blog\blog-author-2.jpg" />
+    <Content Include="Content\img\template\blog\blog-author-3.jpg" />
+    <Content Include="Content\img\template\blog\blog-author-4.jpg" />
+    <Content Include="Content\img\template\blog\blog-author-5.jpg" />
+    <Content Include="Content\img\template\blog\blog-author-6.jpg" />
+    <Content Include="Content\img\template\blog\blog-author.jpg" />
+    <Content Include="Content\img\template\blog\blog-inside-post.jpg" />
+    <Content Include="Content\img\template\blog\blog-recent-1.jpg" />
+    <Content Include="Content\img\template\blog\blog-recent-2.jpg" />
+    <Content Include="Content\img\template\blog\blog-recent-3.jpg" />
+    <Content Include="Content\img\template\blog\blog-recent-4.jpg" />
+    <Content Include="Content\img\template\blog\blog-recent-5.jpg" />
+    <Content Include="Content\img\template\blog\comments-1.jpg" />
+    <Content Include="Content\img\template\blog\comments-2.jpg" />
+    <Content Include="Content\img\template\blog\comments-3.jpg" />
+    <Content Include="Content\img\template\blog\comments-4.jpg" />
+    <Content Include="Content\img\template\blog\comments-5.jpg" />
+    <Content Include="Content\img\template\blog\comments-6.jpg" />
+    <Content Include="Content\img\template\clients\client-1.png" />
+    <Content Include="Content\img\template\clients\client-2.png" />
+    <Content Include="Content\img\template\clients\client-3.png" />
+    <Content Include="Content\img\template\clients\client-4.png" />
+    <Content Include="Content\img\template\clients\client-5.png" />
+    <Content Include="Content\img\template\clients\client-6.png" />
+    <Content Include="Content\img\template\cta-bg.jpg" />
+    <Content Include="Content\img\template\favicon.png" />
+    <Content Include="Content\img\template\features-light-1.jpg" />
+    <Content Include="Content\img\template\features-light-2.jpg" />
+    <Content Include="Content\img\template\features-light-3.jpg" />
+    <Content Include="Content\img\template\hero-bg.jpg" />
+    <Content Include="Content\img\template\logo.png" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-1.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-2.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-3.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-4.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-5.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-6.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-7.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-8.jpg" />
+    <Content Include="Content\img\template\masonry-portfolio\masonry-portfolio-9.jpg" />
+    <Content Include="Content\img\template\portfolio\app-1.jpg" />
+    <Content Include="Content\img\template\portfolio\books-1.jpg" />
+    <Content Include="Content\img\template\portfolio\branding-1.jpg" />
+    <Content Include="Content\img\template\portfolio\product-1.jpg" />
+    <Content Include="Content\img\template\services.jpg" />
+    <Content Include="Content\img\template\stats-bg.jpg" />
+    <Content Include="Content\img\template\team\team-1.jpg" />
+    <Content Include="Content\img\template\team\team-2.jpg" />
+    <Content Include="Content\img\template\team\team-3.jpg" />
+    <Content Include="Content\img\template\team\team-4.jpg" />
+    <Content Include="Content\img\template\team\team-5.jpg" />
+    <Content Include="Content\img\template\team\team-6.jpg" />
+    <Content Include="Content\img\template\testimonials\testimonials-1.jpg" />
+    <Content Include="Content\img\template\testimonials\testimonials-2.jpg" />
+    <Content Include="Content\img\template\testimonials\testimonials-3.jpg" />
+    <Content Include="Content\img\template\testimonials\testimonials-4.jpg" />
+    <Content Include="Content\img\template\testimonials\testimonials-5.jpg" />
+    <Content Include="Content\js\template.js" />
+    <Content Include="Content\css\Template.css" />
+    <Content Include="Content\vendor\aos\aos.cjs.js" />
+    <Content Include="Content\vendor\aos\aos.css" />
+    <Content Include="Content\vendor\aos\aos.esm.js" />
+    <Content Include="Content\vendor\aos\aos.js" />
+    <Content Include="Content\vendor\bootstrap-icons\bootstrap-icons.css" />
+    <Content Include="Content\vendor\bootstrap-icons\bootstrap-icons.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.rtl.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.rtl.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.rtl.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.rtl.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.rtl.css" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.rtl.min.css" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.esm.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.esm.min.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\vendor\glightbox\css\glightbox.css" />
+    <Content Include="Content\vendor\glightbox\css\glightbox.min.css" />
+    <Content Include="Content\vendor\glightbox\js\glightbox.js" />
+    <Content Include="Content\vendor\glightbox\js\glightbox.min.js" />
+    <Content Include="Content\vendor\imagesloaded\imagesloaded.pkgd.min.js" />
+    <Content Include="Content\vendor\isotope-layout\isotope.pkgd.js" />
+    <Content Include="Content\vendor\isotope-layout\isotope.pkgd.min.js" />
+    <Content Include="Content\vendor\php-email-form\validate.js" />
+    <Content Include="Content\vendor\purecounter\purecounter_vanilla.js" />
+    <Content Include="Content\vendor\swiper\swiper-bundle.min.css" />
+    <Content Include="Content\vendor\swiper\swiper-bundle.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -185,6 +314,16 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EmployeeModal.edmx</DependentUpon>
       <LastGenOutput>EmployeeModal.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Employees.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Employees.edmx</DependentUpon>
+      <LastGenOutput>Employees.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Employees.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Employees.edmx</DependentUpon>
+      <LastGenOutput>Employees.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -199,6 +338,42 @@
     <Content Include="Models\EmployeeModal.edmx.diagram">
       <DependentUpon>EmployeeModal.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\Employees.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Employees.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Employees.edmx.diagram">
+      <DependentUpon>Employees.edmx</DependentUpon>
+    </Content>
+    <Content Include="Content\vendor\aos\aos.js.map" />
+    <Content Include="Content\vendor\bootstrap-icons\bootstrap-icons.json" />
+    <Content Include="Content\vendor\bootstrap-icons\bootstrap-icons.scss" />
+    <Content Include="Content\vendor\bootstrap-icons\fonts\bootstrap-icons.woff" />
+    <Content Include="Content\vendor\bootstrap-icons\fonts\bootstrap-icons.woff2" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.rtl.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-grid.rtl.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.rtl.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-reboot.rtl.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.rtl.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap-utilities.rtl.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.rtl.css.map" />
+    <Content Include="Content\vendor\bootstrap\css\bootstrap.rtl.min.css.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.esm.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.esm.min.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.js.map" />
+    <Content Include="Content\vendor\bootstrap\js\bootstrap.min.js.map" />
+    <Content Include="Content\vendor\purecounter\purecounter_vanilla.js.map" />
+    <Content Include="Content\vendor\swiper\swiper-bundle.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -226,9 +401,12 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\CreateEmployee.cshtml" />
     <Content Include="Views\Shared\NavBar.cshtml" />
+    <Content Include="Views\Home\NewEmployee.cshtml" />
+    <Content Include="Views\Home\UploadImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

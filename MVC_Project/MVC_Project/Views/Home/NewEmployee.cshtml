@@ -1,0 +1,78 @@
+﻿@model MVC_Project.Models.tblEmployee
+
+@{
+    ViewBag.Title = "NewEmployee";
+    //List<tblHobby> checkboxdata = ViewBag.tblHobby;
+}
+
+<h2>NewEmployee</h2>
+@using (@Html.BeginForm("Create", "Home", FormMethod.Post))
+{
+    <div>
+        @Html.HiddenFor(m => m.Id)
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter Email", type = "email" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Contact, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @placeholder = "Enter Contact" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Province, new { @class = "form-label" })
+        @* @Html.DropDownListFor(m=>m.Province,"Enum", null, "Select Province", new { @class = "form-control" })*@
+        @Html.DropDownListFor(m => m.Province,
+            new SelectList(Enum.GetValues(typeof(MVC_Project.Enums.Emp.Province))),
+            "Select Province", new { @class = "form-control" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.District, new { @class = "form-label" })
+        @Html.DropDownList("Enum", null, "Select District", new { @class = "form-control" })
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Address, new { @class = "form-label" })
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Enter Address" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Gender, new { @class = "form-label" })
+        @Html.RadioButtonFor(m => m.Gender, "Male") @Html.Label("Male")
+        @Html.RadioButtonFor(m => m.Gender, "Female") @Html.Label("Female")
+        @Html.RadioButtonFor(m => m.Gender, "Other") @Html.Label("Other")
+
+    </div>
+    <div>
+        @*@{
+            var hobbies = ViewBag.tblHobby as List<MVC_Project.Models.tblHobby>;
+        }
+
+        @for (var i = 0; i < hobbies.Count; i++)
+        {
+
+            @Html.CheckBoxFor(x=> x.HobbiesID[i], new {value = hobbies[i].HobbyId })
+        }
+*@
+        @*@foreach (var data in checkboxdata)
+        {
+            <input type="checkbox" name="hobbydata" value="@data.HobbyId" />@data.Description<br />
+        }*@
+
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Description, new { @class = "form-label" })
+        @Html.TextAreaFor(m => m.Description, new { @class = "form-control", @placeholder = "Description" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.Password, new { @class = "form-label" })
+        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Enter Password" })
+    </div>
+
+
+    <input type="submit" value="Create" class="btn btn-success" />
+
+}
