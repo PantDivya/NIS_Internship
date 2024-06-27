@@ -1,5 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="MVC_ProjectModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="MVC_ProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Contact" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblPhotoes" Relationship="Self.FK__tblPhoto__Employ__70DDC3D8" FromRole="Employee" ToRole="tblPhoto" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="Id" />
@@ -17,16 +28,6 @@
     <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityContainer Name="Employees" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
-    <EntitySet Name="tblHobbies" EntityType="MVC_ProjectModel1.tblHobby" />
-    <EntitySet Name="tblPhotoes" EntityType="MVC_ProjectModel1.tblPhoto" />
-    <EntitySet Name="Employees" EntityType="MVC_ProjectModel1.Employee" />
-    <AssociationSet Name="FK__tblPhoto__Employ__70DDC3D8" Association="MVC_ProjectModel1.FK__tblPhoto__Employ__70DDC3D8">
-      <End Role="Employee" EntitySet="Employees" />
-      <End Role="tblPhoto" EntitySet="tblPhotoes" />
-    </AssociationSet>
-  </EntityContainer>
   <EntityType Name="tblHobby">
     <Key>
       <PropertyRef Name="HobbyId" />
@@ -43,22 +44,11 @@
     <Property Name="Location" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
     <Property Name="EmployeeId" Type="Int32" />
-    <NavigationProperty Name="Employee" Relationship="MVC_ProjectModel1.FK__tblPhoto__Employ__70DDC3D8" FromRole="tblPhoto" ToRole="Employee" />
-  </EntityType>
-  <EntityType Name="Employee">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <Property Name="Contact" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="tblPhotoes" Relationship="MVC_ProjectModel1.FK__tblPhoto__Employ__70DDC3D8" FromRole="Employee" ToRole="tblPhoto" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK__tblPhoto__Employ__70DDC3D8" FromRole="tblPhoto" ToRole="Employee" />
   </EntityType>
   <Association Name="FK__tblPhoto__Employ__70DDC3D8">
-    <End Type="MVC_ProjectModel1.Employee" Role="Employee" Multiplicity="0..1" />
-    <End Type="MVC_ProjectModel1.tblPhoto" Role="tblPhoto" Multiplicity="*" />
+    <End Role="Employee" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="tblPhoto" Type="Self.tblPhoto" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Employee">
         <PropertyRef Name="Id" />
@@ -68,4 +58,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="MainEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="tblHobbies" EntityType="Self.tblHobby" />
+    <EntitySet Name="tblPhotoes" EntityType="Self.tblPhoto" />
+    <AssociationSet Name="FK__tblPhoto__Employ__70DDC3D8" Association="Self.FK__tblPhoto__Employ__70DDC3D8">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="tblPhoto" EntitySet="tblPhotoes" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

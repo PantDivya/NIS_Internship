@@ -13,8 +13,7 @@ namespace MVC_Project.Controllers
 {
     public class HomeController : Controller
     {
-        EmployeeEntities db = new EmployeeEntities();
-        Employees employees = new Employees();
+        MainEntities db = new MainEntities();
 
         public ActionResult Index()
         {
@@ -38,7 +37,7 @@ namespace MVC_Project.Controllers
         {
             ViewBag.Enum = GetCity();
 
-            ViewBag.tblHobby = employees.tblHobbies.ToList();
+            ViewBag.tblHobby = db.tblHobbies.ToList();
             return View();
 
         }
@@ -46,8 +45,8 @@ namespace MVC_Project.Controllers
 
         public ActionResult New(tblEmployee employee)
         {
-            var data = employees.tblEmployees.Add(employee);
-            employees.SaveChanges();
+            var data = db.tblEmployees.Add(employee);
+            db.SaveChanges();
             return RedirectToAction("Index");
 
         }
@@ -61,12 +60,11 @@ namespace MVC_Project.Controllers
 
         [HttpPost]
 
-        public ActionResult Create(Employee employee)
+        public ActionResult Create(Employee employee, List<UploadFile> uploadFile)
         {
-
             if (ModelState.IsValid)
             {
-                WebImage photo = null;
+                /*WebImage photo = null;
                 var newFileName = "";
                 var imagePath = "";
 
@@ -79,24 +77,42 @@ namespace MVC_Project.Controllers
 
                     photo.Save(@"~\Content\" + imagePath);
                 }
-                employee.Image = imagePath;
+                employee.Image = imagePath;*/
+                
                 var data = db.Employees.Add(employee);
                 db.SaveChanges();
+                //UploadImage(employee, uploadFile);
                 return RedirectToAction("Index");
             }
             else
             {
-                return View("CreateEmployee",employee);
+                return View("CreateEmployee", employee);
             }
-            
+
         }
 
-        [HttpPost]
-        public ActionResult UploadImage()
+        
+        public void UploadImage(Employee employee, UploadFile uploadFile)
         {
-           
-            
-            return RedirectToAction("Index");
+            var photo = new tblPhoto();
+            if(uploadFile.File != null) 
+            {
+                for (int i = 0; i < uploadFile.File.Count; i++)
+                {
+                    var file = uploadFile.File[i];
+
+                    var newFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(file.FileName);
+                    var imagePath = @"images\" + newFileName;
+                    var fullPath = Server.MapPath(@"~\Content\") + imagePath;
+
+                    file.SaveAs(fullPath);
+                    photo.Location = imagePath;
+                    photo.Name = newFileName;
+                    photo.EmployeeId = employee.Id;
+                    var data = db.tblPhotoes.Add(photo);
+                    db.SaveChanges();
+                }
+            }
         }
     }
 }

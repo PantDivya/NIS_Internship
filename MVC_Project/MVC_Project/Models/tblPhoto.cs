@@ -17,5 +17,8 @@ namespace MVC_Project.Models
         public int Id { get; set; }
         public string Location { get; set; }
         public string Name { get; set; }
+        public Nullable<int> EmployeeId { get; set; }
+    
+        public virtual Employee Employee { get; set; }
     }
 }

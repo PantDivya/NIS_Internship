@@ -1,9 +1,9 @@
-﻿
+﻿@model MVC_Project.Models.Employee
+
 @{
     ViewBag.Title = "CreateEmployee";
 }
 
-@model MVC_Project.Models.Employee
 @if (ViewData.ModelState.IsValid)
 {
     if (@ViewBag.Name != null)
@@ -23,7 +23,13 @@
 {
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    @Html.Label("Photo")
+    <input type="file" id="File" name="uploadFile.File" multiple="multiple" accept="image/*" />
 
+
+    @*<input type="hidden" name="uploadFile.index" value="a" />
+    <input type="file" id="File" name="uploadFile[a].File" multiple="multiple" accept="image/*" />
+    <input type="file" id="File1" name="uploadFile[a].File" multiple="multiple" accept="image/*" />*@
 
     <div class="form-group">
         @*<label for="Name">Name</label>
@@ -53,10 +59,7 @@
         @Html.ValidationMessageFor(m => m.Contact, "", new { @class = "text-danger" })
     </div>
 
-    <div>
-        @Html.Label("Photo")
-        <input type="file" id="image" name="Image" accept="image/*" onchange="fileCheck(this);" />
-    </div>
+
 
     <!--Extra html helper to learn only -->
     @*  <div>
@@ -118,8 +121,8 @@
 }
 
 @*@if (Model.Image != "")
-{
-    <div class="result">
-        <img src="@Image" alt="Image" />
-    </div>
-}*@
+    {
+        <div class="result">
+            <img src="@Image" alt="Image" />
+        </div>
+    }*@

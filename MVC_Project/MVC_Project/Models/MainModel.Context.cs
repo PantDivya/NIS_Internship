@@ -13,10 +13,10 @@ namespace MVC_Project.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EmployeeEntities : DbContext
+    public partial class MainEntities : DbContext
     {
-        public EmployeeEntities()
-            : base("name=EmployeeEntities")
+        public MainEntities()
+            : base("name=MainEntities")
         {
         }
     
@@ -26,5 +26,8 @@ namespace MVC_Project.Models
         }
     
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<tblEmployee> tblEmployees { get; set; }
+        public virtual DbSet<tblHobby> tblHobbies { get; set; }
+        public virtual DbSet<tblPhoto> tblPhotoes { get; set; }
     }
 }

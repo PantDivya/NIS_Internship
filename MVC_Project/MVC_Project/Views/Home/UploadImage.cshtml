@@ -13,7 +13,7 @@
     @using (@Html.BeginForm("UploadImage", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.Label("Photo")
-        <input type="file" id="image" name="Image" accept="image/*" onchange="fileCheck(this);" />
+        <input type="file" id="file" name="File[]" multiple="multiple" accept="image/*" onchange="fileCheck(this);" />
 
         <input type="submit" value="Upload" />
     }

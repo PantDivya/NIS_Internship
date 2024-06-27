@@ -25,5 +25,6 @@ namespace MVC_Project.Models
         public string Hobby { get; set; }
         public string Description { get; set; }
         public string Password { get; set; }
+        public string Image { get; set; }
     }
 }
