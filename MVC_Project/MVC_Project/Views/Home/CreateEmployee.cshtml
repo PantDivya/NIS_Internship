@@ -24,7 +24,7 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
     @Html.Label("Photo")
-    <input type="file" id="File" name="uploadFile.File" multiple="multiple" accept="image/*" />
+    <input type="file" id="File" name="File" multiple="multiple" accept=".png, .jpg, .gif" />
 
 
     @*<input type="hidden" name="uploadFile.index" value="a" />

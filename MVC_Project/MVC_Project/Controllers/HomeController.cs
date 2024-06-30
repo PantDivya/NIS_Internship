@@ -60,7 +60,7 @@ namespace MVC_Project.Controllers
 
         [HttpPost]
 
-        public ActionResult Create(Employee employee, List<UploadFile> uploadFile)
+        public ActionResult Create(Employee employee, UploadFile uploadFile)
         {
             if (ModelState.IsValid)
             {
@@ -81,7 +81,7 @@ namespace MVC_Project.Controllers
                 
                 var data = db.Employees.Add(employee);
                 db.SaveChanges();
-                //UploadImage(employee, uploadFile);
+                UploadImage(employee, uploadFile);
                 return RedirectToAction("Index");
             }
             else
