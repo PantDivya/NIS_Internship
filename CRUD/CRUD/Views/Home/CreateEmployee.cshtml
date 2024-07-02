@@ -25,6 +25,7 @@
     @using (@Html.BeginForm("AddEmployee", "Home", FormMethod.Post))
     {
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.AntiForgeryToken()
 
         <div class="form-group m-5 mb-3 mt-3 col-md-10">
             @Html.LabelFor(m => m.Name, new { @class = "form-label" })

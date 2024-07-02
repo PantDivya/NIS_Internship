@@ -18,6 +18,7 @@ namespace CRUD.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Name is Required")]
+        [RegularExpression(@"^[a-zA-Z]+(?: [a-zA-Z]+)*$", ErrorMessage="Name is not valid")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Address is Required")]
@@ -31,6 +32,8 @@ namespace CRUD.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Contact is Required")]
+        [RegularExpression(@"^(\+\d{1,2}\s?)?\(?\d{3}\)?\d{3}\d{4}$",
+                            ErrorMessage = "Contact is not valid")]
         public string Contact { get; set; }
     }
 }

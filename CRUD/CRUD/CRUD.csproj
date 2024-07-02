@@ -223,6 +223,8 @@
     <Content Include="Views\Shared\_UpdateEmployee.cshtml" />
     <Content Include="Views\Home\UpdateEmployee.cshtml" />
     <Content Include="Views\Home\DeleteEmployee.cshtml" />
+    <Content Include="Views\Shared\_DeleteEmployee.cshtml" />
+    <Content Include="Views\Home\hello.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
