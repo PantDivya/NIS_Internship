@@ -9,8 +9,72 @@
     <Property Name="Address" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
     <Property Name="Email" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
     <Property Name="Contact" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <NavigationProperty Name="tblDepartment" Relationship="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" FromRole="tblEmployee" ToRole="tblDepartment" />
+    <NavigationProperty Name="tblSalary" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblEmployee" ToRole="tblSalary" />
   </EntityType>
   <EntityContainer Name="EmployeeEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
+    <EntitySet Name="Products" EntityType="NIS_DbModel.Product" />
+    <EntitySet Name="tblDepartments" EntityType="NIS_DbModel.tblDepartment" />
+    <EntitySet Name="tblSalaries" EntityType="NIS_DbModel.tblSalary" />
+    <AssociationSet Name="FK__tblEmploy__Depar__48CFD27E" Association="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E">
+      <End Role="tblDepartment" EntitySet="tblDepartments" />
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Salary_Employee" Association="NIS_DbModel.FK_Salary_Employee">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblSalary" EntitySet="tblSalaries" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductId" />
+    </Key>
+    <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Category" Type="String" Nullable="false" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+    <Property Name="Stock" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblDepartment">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblEmployees" Relationship="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" FromRole="tblDepartment" ToRole="tblEmployee" />
+  </EntityType>
+  <EntityType Name="tblSalary">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tblEmployee" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblSalary" ToRole="tblEmployee" />
+  </EntityType>
+  <Association Name="FK__tblEmploy__Depar__48CFD27E">
+    <End Type="NIS_DbModel.tblDepartment" Role="tblDepartment" Multiplicity="0..1" />
+    <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDepartment">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Salary_Employee">
+    <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+    <End Type="NIS_DbModel.tblSalary" Role="tblSalary" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tblSalary">
+        <PropertyRef Name="EmployeeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

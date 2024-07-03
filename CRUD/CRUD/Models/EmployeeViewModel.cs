@@ -9,6 +9,6 @@ namespace CRUD.Models
     {
         public List<tblEmployee> EmployeeList { get; set; }
         public tblEmployee Employee { get; set; }
-
+        public string Name { get; set; }
     }
 }

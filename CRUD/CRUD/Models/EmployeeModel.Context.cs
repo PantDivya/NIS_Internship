@@ -26,5 +26,8 @@ namespace CRUD.Models
         }
     
         public virtual DbSet<tblEmployee> tblEmployees { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<tblDepartment> tblDepartments { get; set; }
+        public virtual DbSet<tblSalary> tblSalaries { get; set; }
     }
 }

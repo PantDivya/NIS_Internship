@@ -12,16 +12,12 @@ namespace CRUD.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class tblEmployee
+    public partial class Product
     {
-        public int Id { get; set; }
+        public int ProductId { get; set; }
         public string Name { get; set; }
-        public string Address { get; set; }
-        public string Email { get; set; }
-        public string Contact { get; set; }
-        public Nullable<int> DepartmentId { get; set; }
-    
-        public virtual tblDepartment tblDepartment { get; set; }
-        public virtual tblSalary tblSalary { get; set; }
+        public string Category { get; set; }
+        public Nullable<decimal> Price { get; set; }
+        public int Stock { get; set; }
     }
 }

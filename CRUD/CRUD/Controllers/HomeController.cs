@@ -96,19 +96,6 @@ namespace CRUD.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-      public ActionResult hello()
-        {
-            IList<tblEmployee> employeeList = new List<tblEmployee>() {
-        new tblEmployee() { Id = 1, Name = "John", Address = "Balkumari"} ,
-        new tblEmployee() { Id = 2, Name = "Moin",  Address = "Imadol" } ,
-        new tblEmployee() { Id = 3, Name = "Bill",  Address = "hello" } ,
-        new tblEmployee() { Id = 4, Name = "Ram" , Address = "how are"} ,
-        new tblEmployee() { Id = 5, Name = "Ram" , Address = "Khana khake jana" }
-    };
-
-            // LINQ Query Syntax 
-            var emp = employeeList.Where(x => x.Address == "hello" && x.Name =="Bill").ToList<tblEmployee>();
-            return View(emp);
-        } 
+      
     }
 }

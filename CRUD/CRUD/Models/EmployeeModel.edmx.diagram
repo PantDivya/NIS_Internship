@@ -4,8 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1060a6bcfa7442c1a510295c95fc335a" Name="Diagram1">
+      <Diagram DiagramId="1060a6bcfa7442c1a510295c95fc335a" Name="Diagram1" ZoomLevel="108">
         <EntityTypeShape EntityType="NIS_DbModel.tblEmployee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="NIS_DbModel.Product" Width="1.5" PointX="5.5" PointY="0.875" />
+        <EntityTypeShape EntityType="NIS_DbModel.tblDepartment" Width="1.5" PointX="0.875" PointY="4" />
+        <EntityTypeShape EntityType="NIS_DbModel.tblSalary" Width="1.5" PointX="3" PointY="1.125" />
+        <AssociationConnector Association="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" />
+        <AssociationConnector Association="NIS_DbModel.FK_Salary_Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
