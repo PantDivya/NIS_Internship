@@ -1,0 +1,61 @@
+﻿@model CRUD.Models.tblEmployee
+
+
+<div class="modal fade" id="@*edit_@Model.Id*@" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (@Html.BeginForm("EditEmployee", "Employee", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(m => m.Id)
+                    @Html.HiddenFor(m => m.tblDepartment.Id)
+
+                    <div class="form-group m-5 mb-3 mt-3 col-md-10">
+                        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @placeholder = "Enter Name" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group m-5 mb-3 mt-3 col-md-10">
+                        @Html.LabelFor(m => m.Address, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "Enter Address" })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group m-5 mb-3 mt-3 col-md-10">
+                        @Html.LabelFor(m => m.Email, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Enter Email" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group m-5 mb-3 mt-3 col-md-10">
+                        @Html.LabelFor(m => m.Contact, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Contact, new { @class = "form-control", @placeholder = "Enter Contact" })
+                        @Html.ValidationMessageFor(m => m.Contact, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group m-5 mb-3 mt-3 col-md-10">
+                        @*@Html.Label("Department", new { @class = "form-label" })
+                            @Html.TextBoxFor(m => m.tblDepartment.DepartmentName, new { @class = "form-control", @placeholder = "Enter Contact" })
+                            @Html.ValidationMessageFor(m => m.tblDepartment.DepartmentName, "", new { @class = "text-danger" })*@                           
+                        @Html.Label("Department", new { @class = "form-label" })
+                        @Html.DropDownList("tblDepartments", null, "--Select--", htmlAttributes: new { @class = "form-control", id = "DepartmentId" ,@Name = "DepartmentId" })
+                        @Html.ValidationMessageFor(m => m.tblDepartment.DepartmentName, null, new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-warning">Update</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!--Edit Modal -->

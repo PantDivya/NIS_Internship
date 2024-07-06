@@ -28,8 +28,6 @@
     <Property Name="Contact" Type="varchar" MaxLength="225" />
     <Property Name="DepartmentId" Type="int" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tblSalary">
     <Key>
       <PropertyRef Name="EmployeeId" />
@@ -65,12 +63,7 @@ warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key 
     <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblSalary" EntityType="Self.tblSalary" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblSalary].[EmployeeId] AS [EmployeeId], 
-    [tblSalary].[Salary] AS [Salary]
-    FROM [dbo].[tblSalary] AS [tblSalary]</DefiningQuery>
-    </EntitySet>
+    <EntitySet Name="tblSalary" EntityType="Self.tblSalary" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK__tblEmploy__Depar__48CFD27E" Association="Self.FK__tblEmploy__Depar__48CFD27E">
       <End Role="tblDepartment" EntitySet="tblDepartment" />
       <End Role="tblEmployee" EntitySet="tblEmployee" />

@@ -24,6 +24,7 @@
                 <th scope="col">Address</th>
                 <th scope="col">Email</th>
                 <th scope="col">Contact</th>
+                <th scope="col">Salary</th>
                 <th scope="col">Action</th>
 
             </tr>
@@ -33,12 +34,13 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    
+
                     <td>@(++i)</td>
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Address)</td>
                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                     <td>@Html.DisplayFor(modelItem => item.Contact)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tblSalary.Salary)</td>
                     <td>
                         @Html.ActionLink(
                             "Update",
@@ -47,9 +49,9 @@
                             new { id = item.Id },
                             new
                             {
-                                @class = "btn btn-warning",
+                                @class = "btn btn-warning"/*,
                                 data_bs_toggle = "modal",
-                                data_bs_target = "#edit_" + item.Id
+                                data_bs_target = "#edit_" + item.Id*/
                             }
                         )
 
@@ -69,13 +71,13 @@
                 </tr>
             }
 
-            @foreach (var employee in Model)
+          @* @foreach (var employee in Model)
             {
                 { Html.RenderPartial("_UpdateEmployee", employee); }
-            }
+            }*@
             @foreach (var employee in Model)
             {
-                { Html.RenderPartial("_DeleteEmployee", employee); }
+                { Html.RenderPartial("PartialView/_DeleteEmployee", employee); }
             }
         </tbody>
     </table>

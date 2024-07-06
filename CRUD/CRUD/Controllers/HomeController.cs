@@ -17,30 +17,18 @@ namespace CRUD.Controllers
         /*[AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]*/
         public ActionResult Index()
         {
-            //EmployeeViewModel viewModel = new EmployeeViewModel();
-
-            List<tblEmployee> employee = db.tblEmployees.ToList();
-
-          /*viewModel.EmployeeList = employee;
-            if(id!= null)
-            {
-                tblEmployee employee1 = db.tblEmployees.Find(id);
-                viewModel.Employee = employee1;
-                EditEmployee(viewModel.Employee);
-            }*/
-
-
-            //return View(viewModel);
-
-
+            List<tblEmployee> employee = db.tblEmployees.Include(x=>x.tblSalary).ToList();
             return View(employee);
+        }
+        public ActionResult CreateEmployee()
+        {
+           ViewBag.Salary = db.tblSalaries;
+            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AddEmployee(tblEmployee employee)
         {
-            //string token = Request.Form["__RequestVerificationToken"];
-
             if (ModelState.IsValid)
             {
                 var data = db.tblEmployees.Add(employee);
@@ -50,8 +38,9 @@ namespace CRUD.Controllers
         }
         public ActionResult UpdateEmployee(int? id)
         {
-
-                var employee = db.tblEmployees.Find(id);
+            var salary = db.tblSalaries.Find(id);
+            /*ViewBag.tblSalary.Salary = salary;*/
+            var employee = db.tblEmployees.Find(id);
                 if (employee != null)
                 {
                     return View(employee);
@@ -66,16 +55,18 @@ namespace CRUD.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                var oldEmployee = db.tblEmployees.Find(id);
+                oldEmployee.Name = employee.Name;
+                oldEmployee.Address = employee.Address;
+                oldEmployee.Email = employee.Email;
+                oldEmployee.Contact = employee.Contact;
+                oldEmployee.tblSalary = employee.tblSalary;
+                db.Entry(oldEmployee).State = EntityState.Modified;
                 db.SaveChanges();
             }
             return RedirectToAction("Index");
         }
 
-        public ActionResult CreateEmployee()
-        {
-            return View();
-        }
         
         public ActionResult DeleteEmployee(int? id)
         {
@@ -91,7 +82,9 @@ namespace CRUD.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(tblEmployee employee, int? id)
         {
+            var empSalary = db.tblSalaries.Find(id);
             employee = db.tblEmployees.Find(id);
+            db.tblSalaries.Remove(empSalary);
             db.tblEmployees.Remove(employee);
             db.SaveChanges();
             return RedirectToAction("Index");

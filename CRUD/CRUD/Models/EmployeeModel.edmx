@@ -33,8 +33,6 @@
           <Property Name="Contact" Type="varchar" MaxLength="225" />
           <Property Name="DepartmentId" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblSalary">
           <Key>
             <PropertyRef Name="EmployeeId" />
@@ -70,12 +68,7 @@ warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key 
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblDepartment" EntityType="Self.tblDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblSalary" EntityType="Self.tblSalary" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblSalary].[EmployeeId] AS [EmployeeId], 
-    [tblSalary].[Salary] AS [Salary]
-    FROM [dbo].[tblSalary] AS [tblSalary]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="tblSalary" EntityType="Self.tblSalary" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__tblEmploy__Depar__48CFD27E" Association="Self.FK__tblEmploy__Depar__48CFD27E">
             <End Role="tblDepartment" EntitySet="tblDepartment" />
             <End Role="tblEmployee" EntitySet="tblEmployee" />
@@ -106,11 +99,11 @@ warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key 
           <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
           <EntitySet Name="Products" EntityType="NIS_DbModel.Product" />
           <EntitySet Name="tblDepartments" EntityType="NIS_DbModel.tblDepartment" />
-          <EntitySet Name="tblSalaries" EntityType="NIS_DbModel.tblSalary" />
           <AssociationSet Name="FK__tblEmploy__Depar__48CFD27E" Association="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E">
             <End Role="tblDepartment" EntitySet="tblDepartments" />
             <End Role="tblEmployee" EntitySet="tblEmployees" />
           </AssociationSet>
+          <EntitySet Name="tblSalaries" EntityType="NIS_DbModel.tblSalary" />
           <AssociationSet Name="FK_Salary_Employee" Association="NIS_DbModel.FK_Salary_Employee">
             <End Role="tblEmployee" EntitySet="tblEmployees" />
             <End Role="tblSalary" EntitySet="tblSalaries" />
@@ -134,14 +127,6 @@ warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key 
           <Property Name="DepartmentName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblEmployees" Relationship="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" FromRole="tblDepartment" ToRole="tblEmployee" />
         </EntityType>
-        <EntityType Name="tblSalary">
-          <Key>
-            <PropertyRef Name="EmployeeId" />
-          </Key>
-          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-          <NavigationProperty Name="tblEmployee" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblSalary" ToRole="tblEmployee" />
-        </EntityType>
         <Association Name="FK__tblEmploy__Depar__48CFD27E">
           <End Type="NIS_DbModel.tblDepartment" Role="tblDepartment" Multiplicity="0..1" />
           <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
@@ -154,6 +139,14 @@ warning 6002: The table/view 'NIS_Db.dbo.tblSalary' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblSalary">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="tblEmployee" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblSalary" ToRole="tblEmployee" />
+        </EntityType>
         <Association Name="FK_Salary_Employee">
           <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
           <End Type="NIS_DbModel.tblSalary" Role="tblSalary" Multiplicity="0..1" />

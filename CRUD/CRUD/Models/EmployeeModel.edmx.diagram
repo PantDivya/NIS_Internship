@@ -8,8 +8,8 @@
         <EntityTypeShape EntityType="NIS_DbModel.tblEmployee" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="NIS_DbModel.Product" Width="1.5" PointX="5.5" PointY="0.875" />
         <EntityTypeShape EntityType="NIS_DbModel.tblDepartment" Width="1.5" PointX="0.875" PointY="4" />
-        <EntityTypeShape EntityType="NIS_DbModel.tblSalary" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" />
+        <EntityTypeShape EntityType="NIS_DbModel.tblSalary" Width="1.5" PointX="3" PointY="1.25" />
         <AssociationConnector Association="NIS_DbModel.FK_Salary_Employee" />
       </Diagram>
     </edmx:Diagrams>

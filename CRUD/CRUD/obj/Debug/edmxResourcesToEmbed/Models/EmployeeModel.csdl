@@ -17,11 +17,11 @@
     <EntitySet Name="tblEmployees" EntityType="Self.tblEmployee" />
     <EntitySet Name="Products" EntityType="NIS_DbModel.Product" />
     <EntitySet Name="tblDepartments" EntityType="NIS_DbModel.tblDepartment" />
-    <EntitySet Name="tblSalaries" EntityType="NIS_DbModel.tblSalary" />
     <AssociationSet Name="FK__tblEmploy__Depar__48CFD27E" Association="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E">
       <End Role="tblDepartment" EntitySet="tblDepartments" />
       <End Role="tblEmployee" EntitySet="tblEmployees" />
     </AssociationSet>
+    <EntitySet Name="tblSalaries" EntityType="NIS_DbModel.tblSalary" />
     <AssociationSet Name="FK_Salary_Employee" Association="NIS_DbModel.FK_Salary_Employee">
       <End Role="tblEmployee" EntitySet="tblEmployees" />
       <End Role="tblSalary" EntitySet="tblSalaries" />
@@ -45,14 +45,6 @@
     <Property Name="DepartmentName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblEmployees" Relationship="NIS_DbModel.FK__tblEmploy__Depar__48CFD27E" FromRole="tblDepartment" ToRole="tblEmployee" />
   </EntityType>
-  <EntityType Name="tblSalary">
-    <Key>
-      <PropertyRef Name="EmployeeId" />
-    </Key>
-    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
-    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="tblEmployee" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblSalary" ToRole="tblEmployee" />
-  </EntityType>
   <Association Name="FK__tblEmploy__Depar__48CFD27E">
     <End Type="NIS_DbModel.tblDepartment" Role="tblDepartment" Multiplicity="0..1" />
     <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="*" />
@@ -65,6 +57,14 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tblSalary">
+    <Key>
+      <PropertyRef Name="EmployeeId" />
+    </Key>
+    <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="tblEmployee" Relationship="NIS_DbModel.FK_Salary_Employee" FromRole="tblSalary" ToRole="tblEmployee" />
+  </EntityType>
   <Association Name="FK_Salary_Employee">
     <End Type="NIS_DbModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
     <End Type="NIS_DbModel.tblSalary" Role="tblSalary" Multiplicity="0..1" />
