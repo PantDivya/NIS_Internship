@@ -1,0 +1,47 @@
+﻿@model CRUDAjax.Models.Product
+<div class="modal fade" id="edit_@Model.ProductId" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            @using (@Html.BeginForm("EditProduct", "Home"))
+            {
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(m => m.ProductId)
+                    
+                    <div class="form-group m-5 mb-3 mt-3 ">
+                        @Html.LabelFor(m => m.Name, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @id = "name", @placeholder = "Enter Product Name" })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group m-5 mb-3 mt-3 ">
+                        @Html.LabelFor(m => m.Category, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Category, new { @class = "form-control", @id = "category", @placeholder = "Enter Product Category" })
+                        @Html.ValidationMessageFor(m => m.Category, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group m-5 mb-3 mt-3 ">
+                        @Html.LabelFor(m => m.Price, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @id = "price", @placeholder = "Enter Product Price" })
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group m-5 mb-3 mt-3 ">
+                        @Html.LabelFor(m => m.Stock, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Stock, new { @class = "form-control", @id = "stock", @placeholder = "Enter Product Stock" })
+                        @Html.ValidationMessageFor(m => m.Stock, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="submit" id="#btnEditProduct" class="btn btn-warning">Update</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
