@@ -1,0 +1,81 @@
+﻿@model DynamicAdd.Models.ProductViewModel
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+<!--Update Product-->
+
+<div>
+    @using (Html.BeginForm("UpdateProduct", "Home", FormMethod.Post))
+    {
+        <div>
+            <h4>Product</h4>
+            @Html.HiddenFor(m=>m.Product.Id)
+            <div class="form-group">
+                @Html.LabelFor(m => m.Product.Name, "Product Name")
+                @Html.EditorFor(m => m.Product.Name, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Name" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Product.Description, "Product Description")
+                @Html.EditorFor(m => m.Product.Description, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Description" } })
+            </div>
+        </div>
+        <!--Add Size-->
+        <div id="size-rows">
+            <h4>Sizes</h4>
+
+            @for (int i = 0; i < Model.Sizes.Count; i++)
+            {
+                @Html.HiddenFor(m => m.Sizes[i].Id)
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Sizes[i].Size_Name, "Size Name")
+                    @Html.EditorFor(m => m.Sizes[i].Size_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Size Name" } })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(m => m.Sizes[i].price, "Price")
+                    @Html.EditorFor(m => m.Sizes[i].price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Price" } })
+                </div>
+            }
+        </div>
+        <div id="template-row" class="form-group size-row" style="display:none;">
+            @Html.HiddenFor(m => m.Sizes[0].Id)
+            <div class="form-group col-md-6">
+                <label>Size Name</label>
+                <input type="text" name="Sizes[0].Size_Name" class="form-control" placeholder="Enter Size Name" />
+            </div>
+            <div class="form-group col-md-6">
+                <label>Price</label>
+                <input type="text" name="Sizes[0].Price" class="form-control" placeholder="Enter Price" />
+            </div>
+        </div>
+        <button id="add-size" type="button">Add Size</button>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    }
+</div>
+<script src="@Url.Content("~/Scripts/jquery-3.4.1.min.js")"></script>
+
+<script>
+        $(document).ready(function () {
+            var sizeIndex = @Model.Sizes.Count;
+
+            $('#add-size').click(function () {
+                // Clone the template row
+                var newRow = $('#template-row').clone();
+
+                // Make the new row visible
+                newRow.show();
+
+                // Update the name attributes to use the current size index
+                newRow.find('input[name="Sizes[0].Size_Name"]').attr('name', 'Sizes[' + sizeIndex + '].Size_Name');
+                newRow.find('input[name="Sizes[0].Price"]').attr('name', 'Sizes[' + sizeIndex + '].Price');
+
+                // Append the new row to the size rows container
+                $('#size-rows').append(newRow);
+
+                // Increment the size index
+                sizeIndex++;
+            });
+        });
+</script>

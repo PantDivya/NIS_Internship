@@ -1,0 +1,65 @@
+﻿@model DynamicAdd.Models.AllProductsViewModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>Product List</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Product Id</th>
+            <th>Product Name</th>
+            <th>Product Description</th>
+            <th>Size Name</th>
+            <th>Price</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var allProducts in Model.AllProducts)
+        {
+            foreach (var size in allProducts.Sizes)
+            {
+                <tr>
+                    <td>@allProducts.Product.Id</td>
+                    <td>@allProducts.Product.Name</td>
+                    <td>@allProducts.Product.Description</td>
+                    <td>@size.Size_Name</td>
+                    <td>@size.price</td>
+                    <td>
+                        @Html.ActionLink(
+                            "Update",
+                            "Update",
+                            "Home",
+                            new { id = allProducts.Product.Id },
+                            new
+                            {
+                                @class = "btn btn-warning"
+                            }
+                        )
+
+                        @Html.ActionLink(
+                            "Delete",  // The link text
+                            "DeleteProduct",         // The action method
+                            "Home",     // The controller
+                           new { id = allProducts.Product.Id },
+                            new
+                            {
+                                @class = "btn btn-danger",
+                                data_bs_toggle = "modal",
+                                data_bs_target = "#delete_" +  allProducts.Product.Id
+                            }
+                        )
+                    </td>
+                </tr>
+            }
+        }
+
+        @foreach (var product in Model.AllProducts)
+        {
+            { Html.RenderPartial("_Delete", product); }
+        }
+    </tbody>
+</table>
