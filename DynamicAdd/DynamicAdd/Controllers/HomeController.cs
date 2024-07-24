@@ -29,13 +29,6 @@ namespace DynamicAdd.Controllers
         public ActionResult AddProduct(tblProduct product)
         {
             db.tblProducts.Add(product);
-            var sizes = product.Sizes;
-            foreach (var size in sizes)
-            {
-                size.Product_Id = product.Id;
-                
-            }
-            db.tblSizes.AddRange(sizes);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -47,10 +40,10 @@ namespace DynamicAdd.Controllers
             return View(product);
         }
 
-        public ActionResult UpdateProduct(tblProduct product, int? id)
+        public ActionResult UpdateProduct(tblProduct product)
         {
-            var oldProduct = db.tblProducts.Find(id);
-            var oldSizes = db.tblSizes.Where(m => m.Product_Id == id).ToList();
+            var oldProduct = db.tblProducts.Find(product.Id);
+            var oldSizes = db.tblSizes.Where(m => m.Product_Id == product.Id).ToList();
             
             oldProduct.Name = product.Name;
             oldProduct.Description = product.Description;
@@ -69,7 +62,7 @@ namespace DynamicAdd.Controllers
                 }
                 else
                 {
-                    size.Product_Id = id;
+                    size.Product_Id = product.Id;
                     db.tblSizes.Add(size);
                 }
             }
@@ -85,11 +78,10 @@ namespace DynamicAdd.Controllers
         }
 
         //Delete product
-        public ActionResult Delete(tblProduct product)
+        public ActionResult Delete(int? id)
         {
-            int Id = product.Id;
-            var oldProduct = db.tblProducts.Find(Id);
-            var oldSizes = db.tblSizes.Where(m => m.Product_Id == Id).ToList();
+            var oldProduct = db.tblProducts.Find(id);
+            var oldSizes = db.tblSizes.Where(m => m.Product_Id == id).ToList();
             db.tblSizes.RemoveRange(oldSizes);
             db.tblProducts.Remove(oldProduct);
             db.SaveChanges();
