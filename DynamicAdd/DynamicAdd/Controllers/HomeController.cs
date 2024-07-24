@@ -14,63 +14,50 @@ namespace DynamicAdd.Controllers
         ProductEntities db = new ProductEntities();
         public ActionResult Index()
         {
-            AllProductsViewModel viewModel = new AllProductsViewModel();
+            List<tblProduct> viewModel = new List<tblProduct>();
             var productList = db.tblProducts.ToList();
-            foreach (var product in productList)
-            {
-                var sizes = db.tblSizes.Where(s => s.Product_Id == product.Id).ToList();
-                var productViewModel = new ProductViewModel
-                {
-                    Product = product,
-                    Sizes = sizes
-                };
-                viewModel.AllProducts.Add(productViewModel);
-            }
+            viewModel.AddRange(productList);
             return View(viewModel);
         }
         //Add product
         public ActionResult Add()
         {
-            ProductViewModel model = new ProductViewModel();
+            var model = new tblProduct();
             return View(model);
         }
 
-        public ActionResult AddProduct(ProductViewModel productViewModel)
+        public ActionResult AddProduct(tblProduct product)
         {
-            var product = productViewModel.Product;
             db.tblProducts.Add(product);
-            var sizes = productViewModel.Sizes;
+            var sizes = product.Sizes;
             foreach (var size in sizes)
             {
-                size.Product_Id = productViewModel.Product.Id;
-                db.tblSizes.Add(size);
+                size.Product_Id = product.Id;
+                
             }
+            db.tblSizes.AddRange(sizes);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
         //Update Product
         public ActionResult Update(int id)
-        {
+        { 
             var product = db.tblProducts.Find(id);
-            var sizes = db.tblSizes.Where(m => m.Product_Id == id).ToList();
-            ProductViewModel model = new ProductViewModel();
-            model.Product = product;
-            model.Sizes = sizes;
-            return View(model);
+            product.Sizes = product.tblSizes.ToList();
+            return View(product);
         }
 
-        public ActionResult UpdateProduct(ProductViewModel productViewModel)
+        public ActionResult UpdateProduct(tblProduct product, int? id)
         {
-            int id = productViewModel.Product.Id;
             var oldProduct = db.tblProducts.Find(id);
             var oldSizes = db.tblSizes.Where(m => m.Product_Id == id).ToList();
             
-            oldProduct.Name = productViewModel.Product.Name;
-            oldProduct.Description = productViewModel.Product.Description;
+            oldProduct.Name = product.Name;
+            oldProduct.Description = product.Description;
             db.Entry(oldProduct).State = EntityState.Modified;
 
             
-            foreach (var size in productViewModel.Sizes)
+            foreach (var size in product.Sizes)
             {
                 var oldSize = oldSizes.FirstOrDefault(s => s.Id == size.Id);
 
@@ -88,7 +75,7 @@ namespace DynamicAdd.Controllers
             }
             foreach (var oldSize in oldSizes)
             {
-                if (!productViewModel.Sizes.Any(s => s.Id == oldSize.Id))
+                if (!product.Sizes.Any(s => s.Id == oldSize.Id))
                 {
                     db.tblSizes.Remove(oldSize);
                 }
@@ -103,10 +90,7 @@ namespace DynamicAdd.Controllers
             int Id = product.Id;
             var oldProduct = db.tblProducts.Find(Id);
             var oldSizes = db.tblSizes.Where(m => m.Product_Id == Id).ToList();
-            foreach (var oldSize in oldSizes)
-            {
-                db.tblSizes.Remove(oldSize);
-            }
+            db.tblSizes.RemoveRange(oldSizes);
             db.tblProducts.Remove(oldProduct);
             db.SaveChanges();
             return RedirectToAction("Index");

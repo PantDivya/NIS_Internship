@@ -1,4 +1,4 @@
-﻿@model DynamicAdd.Models.ProductViewModel
+﻿@model DynamicAdd.Models.tblProduct
 @{
     ViewBag.Title = "Add";
 }
@@ -12,27 +12,28 @@
         <div>
             <h4>Product</h4>
             <div class="form-group">
-                @Html.LabelFor(m => m.Product.Name, "Product Name")
-                @Html.EditorFor(m => m.Product.Name, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Name" } })
+                @Html.LabelFor(m => m.Name, "Product Name")
+                @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Name" } })
             </div>
             <div class="form-group">
-                @Html.LabelFor(m => m.Product.Description, "Product Description")
-                @Html.EditorFor(m => m.Product.Description, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Description" } })
+                @Html.LabelFor(m => m.Description, "Product Description")
+                @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Enter Product Description" } })
             </div>
         </div>
         <!--Add Size-->
         <div id="size-rows">
             <h4>Sizes</h4>
 
-            @for (int i = 0; i < Model.Sizes.Count; i++)
+            @for (int i = 0; i < Model.Sizes.Count(); i++)
             {
-                <div class="form-group col-md-6">
+                @Html.HiddenFor(m => m.Sizes[i].Id)
+                <div class="form-group cols-md-6">
                     @Html.LabelFor(m => m.Sizes[i].Size_Name, "Size Name")
-                    @Html.EditorFor(m => m.Sizes[i].Size_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Size Name" } })
+                    @Html.TextBoxFor(m => m.Sizes[i].Size_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Size Name" } })
                 </div>
                 <div class="form-group col-md-6">
                     @Html.LabelFor(m => m.Sizes[i].price, "Price")
-                    @Html.EditorFor(m => m.Sizes[i].price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Price" } })
+                    @Html.TextBoxFor(m => m.Sizes[i].price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Enter Price" } })
                 </div>
             }
         </div>

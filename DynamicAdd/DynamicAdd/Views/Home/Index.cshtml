@@ -1,5 +1,4 @@
-﻿@model DynamicAdd.Models.AllProductsViewModel
-
+﻿@model IEnumerable<DynamicAdd.Models.tblProduct>
 @{
     ViewBag.Title = "Home Page";
 }
@@ -18,14 +17,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var allProducts in Model.AllProducts)
+        @foreach (var item in Model)
         {
-            foreach (var size in allProducts.Sizes)
+            foreach (var size in item.tblSizes)
             {
                 <tr>
-                    <td>@allProducts.Product.Id</td>
-                    <td>@allProducts.Product.Name</td>
-                    <td>@allProducts.Product.Description</td>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
                     <td>@size.Size_Name</td>
                     <td>@size.price</td>
                     <td>
@@ -33,7 +32,7 @@
                             "Update",
                             "Update",
                             "Home",
-                            new { id = allProducts.Product.Id },
+                            new { id = item.Id },
                             new
                             {
                                 @class = "btn btn-warning"
@@ -44,12 +43,12 @@
                             "Delete",  // The link text
                             "DeleteProduct",         // The action method
                             "Home",     // The controller
-                           new { id = allProducts.Product.Id },
+                           new { id = item.Id },
                             new
                             {
                                 @class = "btn btn-danger",
                                 data_bs_toggle = "modal",
-                                data_bs_target = "#delete_" +  allProducts.Product.Id
+                                data_bs_target = "#delete_" +  item.Id
                             }
                         )
                     </td>
@@ -57,7 +56,7 @@
             }
         }
 
-        @foreach (var product in Model.AllProducts)
+        @foreach (var product in Model)
         {
             { Html.RenderPartial("_Delete", product); }
         }

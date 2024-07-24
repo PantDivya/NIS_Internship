@@ -1,6 +1,6 @@
-﻿@model DynamicAdd.Models.ProductViewModel
+﻿@model DynamicAdd.Models.tblProduct
 
-<div class="modal fade" id="delete_@Model.Product.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="delete_@Model.Id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -14,7 +14,7 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
                 @using (@Html.BeginForm("Delete", "Home", FormMethod.Post))
                 {
-                    @Html.HiddenFor(m => m.Product.Id)
+                    @Html.HiddenFor(m => m.Id)
                     <button type="submit" class="btn btn-danger">Delete</button>
                 }
             </div>
