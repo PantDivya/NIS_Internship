@@ -24,7 +24,18 @@
     }
 </div>
 
-<div>
+<div class="mt-3 float-end">
+    <div>
+        @Html.ActionLink(
+                           "Export",
+                           "ExportToExcel",
+                           "Home",
+                           new
+                           {
+                               @class = "btn btn-outline-info"
+                           }
+                       )
+    </div>
     <table class="table">
         <thead class="thead-dark">
             <tr>

@@ -1,4 +1,5 @@
-﻿using ExcelDataReader;
+﻿using ClosedXML.Excel;
+using ExcelDataReader;
 using ReadUploadExcelFile.Models;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace ReadUploadExcelFile.Controllers
             if (fileUpload.ContentType == "application/vnd.ms-excel" || fileUpload.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             {
                 string fileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(fileUpload.FileName);
-                string rootPath = Server.MapPath("~/App_Data/Uploads"); // Ensure this directory exists
+                string rootPath = Server.MapPath("~/App_Data/Uploads"); 
                 string filePath = Path.Combine(rootPath, fileName);
 
                 try
@@ -68,11 +69,11 @@ namespace ReadUploadExcelFile.Controllers
                             student.ParentName = dt.Rows[i][9].ToString();
                             student.ParentNumber = dt.Rows[i][10].ToString();
                             db.Students.Add(student);
-                            db.SaveChanges();
                             i++;
                         }
                         
                     }
+                    db.SaveChanges();
 
                     ViewBag.SheetNames = sheetNames;
                     ViewBag.Message = "File uploaded successfully!";
@@ -95,6 +96,16 @@ namespace ReadUploadExcelFile.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ExportToExcel()
+        {
+            var students = db.Students.ToList();
+            var stream = CreateExcelFile(students);
+
+            string excelName = $"Students-{Guid.NewGuid()}.xlsx";
+
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", excelName);
         }
 
         private DataTableCollection ReadFromExcel(string filePath, ref List<string> sheetNames)
@@ -121,10 +132,49 @@ namespace ReadUploadExcelFile.Controllers
             }
             return tableCollection;
         }
-        
-        public ActionResult AddStudent()
+
+        public MemoryStream CreateExcelFile(List<Student> students)
         {
-            return RedirectToAction("Index");
+            var workbook = new XLWorkbook();
+           
+            IXLWorksheet worksheet = workbook.Worksheets.Add("Students");
+            
+            worksheet.Cell(1, 1).Value = "ID"; 
+            worksheet.Cell(1, 2).Value = "FirstName"; 
+            worksheet.Cell(1, 3).Value = "LastName"; 
+            worksheet.Cell(1, 4).Value = "MiddleName";
+            worksheet.Cell(1, 5).Value = "City"; 
+            worksheet.Cell(1, 6).Value = "Country";
+            worksheet.Cell(1, 6).Value = "StreetAddress";
+            worksheet.Cell(1, 6).Value = "Email";
+            worksheet.Cell(1, 6).Value = "PhoneNo";
+            worksheet.Cell(1, 6).Value = "ParentName";
+            worksheet.Cell(1, 6).Value = "ParentNumber";
+
+            int row = 2;
+
+            foreach (var std in students)
+            {
+                worksheet.Cell(row, 1).Value = std.ID;
+                worksheet.Cell(row, 2).Value = std.FirstName;
+                worksheet.Cell(row, 3).Value = std.LastName;
+                worksheet.Cell(row, 4).Value = std.MiddleName;
+                worksheet.Cell(row, 5).Value = std.City;
+                worksheet.Cell(row, 6).Value = std.StreetAddress;
+                worksheet.Cell(row, 6).Value = std.Email;
+                worksheet.Cell(row, 6).Value = std.PhoneNo;
+                worksheet.Cell(row, 6).Value = std.ParentName;
+                worksheet.Cell(row, 6).Value = std.ParentNumber;
+                row++; 
+            }
+            
+            var stream = new MemoryStream();
+            
+            workbook.SaveAs(stream);
+            
+            stream.Position = 0;
+            return stream;
         }
+
     }
 }
