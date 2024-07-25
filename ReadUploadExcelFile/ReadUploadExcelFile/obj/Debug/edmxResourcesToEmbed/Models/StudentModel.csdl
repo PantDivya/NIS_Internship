@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NIS_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="MiddleName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="City" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="State" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Country" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="StreetAddress" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="ParentName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="ParentNumber" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="StudentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Students" EntityType="Self.Student" />
+  </EntityContainer>
+</Schema>

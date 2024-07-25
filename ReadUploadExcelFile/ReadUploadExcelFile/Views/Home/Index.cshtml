@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ReadUploadExcelFile.Models.Student>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div>
+    @using (Html.BeginForm("UploadExcel", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="form-horizontal">
+
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    <input type="file" id="fileUpload" name="fileUpload" class="" accept=".xlsx, .xls" />
+                </div>
+            </div>
+            <br>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Upload" id="btnSubmit" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Name</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Country</th>
+                <th scope="col">StreetAddress</th>
+                <th scope="col">Email</th>
+                <th scope="col">PhoneNo</th>
+                <th scope="col">ParentName</th>
+                <th scope="col">ParentNumber</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @{ var i=1;}
+            @foreach(var student in Model) 
+            {
+                <tr>
+                    <td>@i</td>
+                    <td>@student.FirstName @student.MiddleName @student.LastName</td>
+                    <td>@student.City</td>
+                    <td>@student.State</td>
+                    <td>@student.Country</td>
+                    <td>@student.StreetAddress</td>
+                    <td>@student.Email</td>
+                    <td>@student.PhoneNo</td>
+                    <td>@student.ParentName</td>
+                    <td>@student.ParentNumber</td>
+                </tr>
+                i++;
+            }
+            
+        </tbody>
+    </table>
+</div>
