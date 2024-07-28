@@ -124,6 +124,7 @@
     <Compile Include="Areas\Students\Controllers\IndexController.cs" />
     <Compile Include="Areas\Students\StudentsAreaRegistration.cs" />
     <Compile Include="Areas\Teachers\Controllers\FacultyController.cs" />
+    <Compile Include="Areas\Teachers\Controllers\IndexController.cs" />
     <Compile Include="Areas\Teachers\TeachersAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -153,6 +154,9 @@
     <Content Include="Areas\Students\Views\Home\Index.cshtml" />
     <Content Include="Areas\Students\Views\Index\Index.cshtml" />
     <Content Include="Areas\Teachers\Views\Faculty\Index.cshtml" />
+    <Content Include="Areas\Teachers\Views\Index\Index.cshtml" />
+    <Content Include="Areas\Students\Views\Index\StudentList.cshtml" />
+    <Content Include="Areas\Teachers\Views\Index\TeacherList.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
