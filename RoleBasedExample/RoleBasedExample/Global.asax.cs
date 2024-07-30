@@ -22,7 +22,10 @@ namespace RoleBasedExample
         {
             var db = new MainEntities();
             //populating roles
-            if(db.Roles.Any(x=>x.RoleName == ))
+            if(db.Roles.Any(x=>x.RoleName == MyConstant.RoleAdmin))
+            {
+                db.Roles.Add(new Microsoft. .Identity.EntityFramework.IdentityRole(MyConstant.RoleAdmin));
+            }
         }
     }
 }

@@ -156,6 +156,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\MyConstant.cs" />
     <Compile Include="Models\Role.cs">
       <DependentUpon>MainModel.tt</DependentUpon>
     </Compile>
