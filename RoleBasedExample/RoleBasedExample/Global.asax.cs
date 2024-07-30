@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RoleBasedExample.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +17,12 @@ namespace RoleBasedExample
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        public void PopulateUserAndRoles()
+        {
+            var db = new MainEntities();
+            //populating roles
+            if(db.Roles.Any(x=>x.RoleName == ))
         }
     }
 }

@@ -15,7 +15,7 @@ namespace RoleBasedExample.Controllers
         private MainEntities db = new MainEntities();
 
         // GET: Employees
-        [Authorize(Roles = "Admin,Manager")]
+        [Authorize(Roles = "Admin, Manager")]
         public ActionResult Index()
         {
             var employees = db.Employees.Include(e => e.Department);

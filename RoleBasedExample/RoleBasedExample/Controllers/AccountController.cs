@@ -10,6 +10,7 @@ namespace RoleBasedExample.Controllers
 {
     public class AccountController : Controller
     {
+        MainEntities db = new MainEntities();
         // GET: Account
         public ActionResult Index()
         {
@@ -28,18 +29,21 @@ namespace RoleBasedExample.Controllers
                 ViewBag.ErrorMessage = "Username and password are required.";
                 return View("Index", "Home");
             }
-
+            
+                
             // Authenticate user
             using (var _db = new MainEntities()) 
             {
                 var user = _db.Users.SingleOrDefault(u => u.Username == loginUser.Username && u.Password == loginUser.Password);
-
-                if (user != null)
+               /* var roleMapping = db.UserRoleMappings.Select(m=>m.UserId).Where(m => m.UserId == user.Id);
+                var id = 
+                var userRole = db.Roles.Find(id);*/
+                if (user != null )
                 {
-                    FormsAuthentication.SetAuthCookie(user.Username, false);
+                    FormsAuthentication.SetAuthCookie(user.Username, true);
                     Session["Username"] = user.Username;
-                    Session["Username"] = user.Username; 
-                    return RedirectToAction("Index", "Home"); 
+                    Session["Username"] = user.Username;
+                    return RedirectToAction("Index", "Employees");
                 }
                 else
                 {
