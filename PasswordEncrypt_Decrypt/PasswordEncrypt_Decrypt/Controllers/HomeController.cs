@@ -23,7 +23,17 @@ namespace PasswordEncrypt_Decrypt.Controllers
             user.Password = encryptedPassword;
             db.User_tbl.Add(user);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            if(user != null)
+            {
+                Session["UserID"] = user.Id.ToString();
+                Session["UserName"] = user.Username.ToString();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
+            
         }
         public ActionResult UserList()
         {
