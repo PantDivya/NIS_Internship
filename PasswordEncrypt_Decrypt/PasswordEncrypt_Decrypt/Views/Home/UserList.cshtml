@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PasswordEncrypt_Decrypt.Models.User_tbl>
+
+@{
+    ViewBag.Title = "UserList";
+}
+
+<h2>UserList</h2>
+
+<div>
+    <h4>User_tbl</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">SN</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">EncryptedPassword</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m=>item.Id)</td>
+                    <td>@Html.DisplayFor(m => item.Username)</td>
+                    <td>@Html.DisplayFor(m => item.Password)</td>
+                    <td>@Html.DisplayFor(m =>item.EncryptedPassword)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
