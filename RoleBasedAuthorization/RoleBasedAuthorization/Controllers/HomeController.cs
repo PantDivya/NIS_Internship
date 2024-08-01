@@ -14,7 +14,7 @@ namespace RoleBasedAuthorization.Controllers
             return View();
         }
 
-        [Authorize(Roles = MyConstant.RoleUser)]
+        [Authorize(Roles = MyConstant.RoleUser + "," + MyConstant.RoleAdmin)]
         public ActionResult Employee()
         {           
             return View();
