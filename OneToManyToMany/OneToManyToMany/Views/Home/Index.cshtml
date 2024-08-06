@@ -54,15 +54,14 @@
     </textarea>
     </div>
 
+    <script src="/Scripts/jquery-3.4.1.js"></script>
     <script>
-
-
-        $(document).ready(function () {
+         $(document).ready(function () {
             var depIndex = $('#my-container', '.department-row').length();
             var empIndex = $('#my-container', '.employee-row').length();
             var projectIndex = $('#my-container', '.project-row').length();
             //Add department
-            $('#add-Deprartment').click(function () {
+            $(document).on('click', '#add-Department',function () {
 
                 var newDepartment = $('.department-row').clone();
 
@@ -73,6 +72,10 @@
                 $('.department-row').append(newDepartment);
 
                // depIndex++;
+            });
+            //remove department
+            $(document).on('click', '#remove-Department', function () {
+                $(this).closest('.department-row').remove();
             });
             //Add employee
             $('#add-Employee').click(function () {
