@@ -1,113 +1,113 @@
-﻿    @model List<OneToManyToMany.Models.DepartmentViewModel>
+﻿@model List<OneToManyToMany.Models.DepartmentViewModel>
 
-    @{
-        ViewBag.Title = "Home Page";
-    }
+@{
+    ViewBag.Title = "Home Page";
+}
 
-    <h1>Welcome</h1>
+<h1>Welcome</h1>
 
 
-    <div id="my-container">
+<div id="my-container">
+    <div>
+        <button id="add-Department">Add Department</button>
+    </div>
+    <div id="departments">
+
+    </div>
+    <div class="department-row" style="display:none;">
         <div>
-            <button id="add-Department">Add Department</button>
-        </div>
+            @Html.LabelFor(m => m[0].Name)
+            @Html.TextBoxFor(m => m[0].Name, htmlAttributes: new { @class = "", @Name = "Department[0].Name", @id = "Department_0.Name", @data_value = "" })
 
-        <div class="department-row" style="display:none;">
-            <div>
-                @Html.LabelFor(m => m[0].Name)
-                @Html.EditorFor(m => m[0].Name)
-                @*@for (int i = 0; i < Model.Count(); i++)
-                {
-                    @Html.LabelFor(m => m[i].Name)
-                    @Html.EditorFor(m => m[i].Name)
-                }*@
-            </div>
-            <button id="add-Employee">Add Employee</button>
         </div>
-
-    <textarea class="employee-row" style="display:none;">
-        <div>
-            @Html.LabelFor(m => m[0].Employees[0].Name)
-            @Html.TextBoxFor(m => m[0].Employees[0].Name, htmlAttributes: new { @class = "", @Name = "", @id = "", @data_value = "" })
-        </div>
-        <div>
-            @Html.LabelFor(m => m[0].Employees[0].Address)
-            @Html.TextBoxFor(m => m[0].Employees[0].Address)
-        </div>     
-    <button class="btn btn-danger" id="remove-Employee">remove</button>
-    <button id="add-Project">Add Project</button>
-    <table id="dynamicTable" class="table table-bordered" data-template="rowTemplate" data-value1="1">
-        <thead>
-        <tr>
-        <th>Project Name</th>
-         </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-    </textarea>
-
-    <textarea class="project-row" style="display:none;">
-        <tr>
-        <td>@Html.DisplayFor(m => m[0].Employees[0].Projects[0].ProjectName)</td>
-        </tr>
-    </textarea>
+        <button class="btn btn-danger" id="remove-Employee">remove</button>
+        <button id="add-Employee">Add Employee</button>
     </div>
 
-    <script src="/Scripts/jquery-3.4.1.js"></script>
-    <script>
-         $(document).ready(function () {
-            var depIndex = $('#my-container', '.department-row').length();
-            var empIndex = $('#my-container', '.employee-row').length();
-            var projectIndex = $('#my-container', '.project-row').length();
-            //Add department
-            $(document).on('click', '#add-Department',function () {
+<div class="employee-row" style="display:none;">
+    <div>
+        @Html.LabelFor(m => m[0].Employees[0].Name)
+        @Html.TextBoxFor(m => m[0].Employees[0].Name, htmlAttributes: new { @class = "", @Name = "Department[0].Employee[0].Name", @id = "", @data_value = "" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m[0].Employees[0].Address)
+        @Html.TextBoxFor(m => m[0].Employees[0].Address, htmlAttributes: new { @class = "", @Name = "Department[0].Employee[0].Address", @id = "Employee_0.Address", @data_value = "" })
+    </div>     
+<button class="btn btn-danger" id="remove-Employee">remove</button>
+<button id="add-Project">Add Project</button>
+<table id="dynamicTable" class="table table-bordered" data-template="rowTemplate" data-value1="1">
+    <thead>
+    <tr>
+    <th>Project Name</th>
+     </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+</div>
+<div class="project-row" style="display:none;">
+<tr>
+<td>@Html.TextBoxFor(m => m[0].Employees[0].Projects[0].ProjectName, htmlAttributes: new { @class = "", @Name = "Department[0].Name", @id = "Department_0.Name", @data_value = "" })</td>
+    </tr>
+<button class="btn btn-danger" id="remove-Project">remove</button>
+</div>
+</div>
 
-                var newDepartment = $('.department-row').clone();
+<script src="/Scripts/jquery-3.4.1.js"></script>
+<script>
+     $(document).ready(function () {
+        var depIndex = 0;
+         var empIndex = 0;
+         var projectIndex = 0;
+        //Add department
+        $(document).on('click', '#add-Department',function () {
 
-                newDepartment.show();
+            var newDepartment = $('.department-row').clone();
 
-                newDepartment.find('input[name="Department[0].Name"]').attr('name', 'Department['+depIndex+'].Name');
+            newDepartment.show();
 
-                $('.department-row').append(newDepartment);
+            newDepartment.find('input[name="Department[0].Name"]').attr('name', 'Department[' + depIndex + '].Name');
 
-               // depIndex++;
-            });
-            //remove department
-            $(document).on('click', '#remove-Department', function () {
-                $(this).closest('.department-row').remove();
-            });
-            //Add employee
-            $('#add-Employee').click(function () {
+            $('#departments').append(newDepartment);
+
+           depIndex++;
+        });
+        //remove department
+        $(document).on('click', '#remove-Department', function () {
+            $(this).closest('.department-row').remove();
+        });
+        //Add employee
+         $(document).on('click', '#add-Employee',function () {
 
             var newEmployee = $('.employee-row').clone();
 
-                newEmployee.show();
+            newEmployee.show();
 
-
-                newEmployee.find('input[name="Department[0].Employees[0].Name"]').attr('name', 'Department[' + depIndex + '].Employees[' + empIndex + '].Name');
-                newEmployee.find('input[name="Department[0].Employees[0].Address"]').attr('name', 'Separtment[' + depIndex + '].Employees[' + empIndex + '].Address');
+            newEmployee.find('input[name="Department[0].Employee[0].Name"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Name');
+            newEmployee.find('input[name="Department[0].Employee[0].Address"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Address');
 
             $('.department-row').append(newEmployee);
 
-                //empIndex++;
+            empIndex++;
+         });
+          //remove employee
+    $(document).on('click', '#remove-Employee',function () {
+        $(this).closest('.employee-row').remove();
+    });
+    //Add project
+         $(document).on('click', "#add-Project", function () {
+            var newProject = $('.project-row').clone();
+            newProject.show();
+            newProject.find('input[name="Department[0].Employees[0].Projects[0].ProjectName"]').attr('name', 'Department[' + depIndex + '].Employees[' + empIndex + '].Projects[' + projectIndex + '].ProjectName');
+            $('.employee-row').append(newProject);
+            projectIndex++;
         });
-        $(document).on('click', '#remove-Employee',function () {
-            $(this).closest('.employee-row').remove();
+        $(document).on('click', '#remove-Project', function () {
+            $(this).closest('.project-row').remove();
         });
-        //Add project
-            $("#add-Project").click(function () {
-                var newProject = $('.project-row').clone();
-                newProject.show();
-                newProject.find('input[name="Department[0].Employees[0].Projects[0].ProjectName"]').attr('name', 'Department[' + depIndex + '].Employees[' + empIndex + '].Projects[' + projectIndex + '].ProjectName');
-                $('.employee-row').append(newProject);
-            });
-            $(document).on('click', '#remove-Project', function () {
-                $(this).closest('.project-row').remove();
-            });
-        });
+    });
 
-    /*      var self = this;
-            $(document).on('click', "#add-Employee", self.addRow);
-            $(document).on('click', "#remove-Employee", self.removeRow);*/
-    </script>
+/*      var self = this;
+        $(document).on('click', "#add-Employee", self.addRow);
+        $(document).on('click', "#remove-Employee", self.removeRow);*/
+</script>
