@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NIS_DbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tbl_Employee" Relationship="Self.FK__tbl_Emplo__Depar__2CF2ADDF" FromRole="tbl_Department" ToRole="tbl_Employee" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Department_Id" Type="Int32" />
+    <NavigationProperty Name="tbl_Department" Relationship="Self.FK__tbl_Emplo__Depar__2CF2ADDF" FromRole="tbl_Employee" ToRole="tbl_Department" />
+    <NavigationProperty Name="tbl_Project" Relationship="Self.FK__tbl_Proje__Emplo__2DE6D218" FromRole="tbl_Employee" ToRole="tbl_Project" />
+  </EntityType>
+  <EntityType Name="tbl_Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" MaxLength="225" FixedLength="false" Unicode="false" />
+    <Property Name="Employee_Id" Type="Int32" />
+    <NavigationProperty Name="tbl_Employee" Relationship="Self.FK__tbl_Proje__Emplo__2DE6D218" FromRole="tbl_Project" ToRole="tbl_Employee" />
+  </EntityType>
+  <Association Name="FK__tbl_Emplo__Depar__2CF2ADDF">
+    <End Role="tbl_Department" Type="Self.tbl_Department" Multiplicity="0..1" />
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Employee">
+        <PropertyRef Name="Department_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__Emplo__2DE6D218">
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MainEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Department" EntityType="Self.tbl_Department" />
+    <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" />
+    <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" />
+    <AssociationSet Name="FK__tbl_Emplo__Depar__2CF2ADDF" Association="Self.FK__tbl_Emplo__Depar__2CF2ADDF">
+      <End Role="tbl_Department" EntitySet="tbl_Department" />
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__Emplo__2DE6D218" Association="Self.FK__tbl_Proje__Emplo__2DE6D218">
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

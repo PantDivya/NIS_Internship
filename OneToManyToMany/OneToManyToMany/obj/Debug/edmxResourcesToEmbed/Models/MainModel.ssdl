@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NIS_DbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbl_Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="225" />
+  </EntityType>
+  <EntityType Name="tbl_Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="225" />
+    <Property Name="Address" Type="varchar" MaxLength="225" />
+    <Property Name="Department_Id" Type="int" />
+  </EntityType>
+  <EntityType Name="tbl_Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="225" />
+    <Property Name="Employee_Id" Type="int" />
+  </EntityType>
+  <Association Name="FK__tbl_Emplo__Depar__2CF2ADDF">
+    <End Role="tbl_Department" Type="Self.tbl_Department" Multiplicity="0..1" />
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Employee">
+        <PropertyRef Name="Department_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tbl_Proje__Emplo__2DE6D218">
+    <End Role="tbl_Employee" Type="Self.tbl_Employee" Multiplicity="0..1" />
+    <End Role="tbl_Project" Type="Self.tbl_Project" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tbl_Project">
+        <PropertyRef Name="Employee_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NIS_DbModelStoreContainer">
+    <EntitySet Name="tbl_Department" EntityType="Self.tbl_Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbl_Project" EntityType="Self.tbl_Project" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tbl_Emplo__Depar__2CF2ADDF" Association="Self.FK__tbl_Emplo__Depar__2CF2ADDF">
+      <End Role="tbl_Department" EntitySet="tbl_Department" />
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tbl_Proje__Emplo__2DE6D218" Association="Self.FK__tbl_Proje__Emplo__2DE6D218">
+      <End Role="tbl_Employee" EntitySet="tbl_Employee" />
+      <End Role="tbl_Project" EntitySet="tbl_Project" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
