@@ -14,7 +14,6 @@ namespace OneToManyToMany.Models
     public class EmployeeViewModel
     {
         public string Name { get; set; }
-        public string Address { get; set; }
         public List<ProjectViewModel> Projects { get; set; }
     }
 

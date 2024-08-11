@@ -15,11 +15,16 @@ namespace OneToManyToMany.Controllers
         {
             return View();
         }
-        public ActionResult Create(List<DepartmentViewModel> modelList)
+        public ActionResult Create()
         {
-            foreach(var model in modelList) 
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(List<DepartmentViewModel> modelList)
+        { 
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                foreach (var model in modelList)
                 {
                     var department = db.tbl_Department.FirstOrDefault(x => x.DepartmentName == model.Name);
 
@@ -31,7 +36,6 @@ namespace OneToManyToMany.Controllers
                             tbl_Employee = model.Employees.Select(e => new tbl_Employee
                             {
                                 Name = e.Name,
-                                Address = e.Address,
                                 tbl_Project = e.Projects.Select(p => new tbl_Project
                                 {
                                     ProjectName = p.ProjectName
@@ -46,7 +50,6 @@ namespace OneToManyToMany.Controllers
                         department.tbl_Employee = model.Employees.Select(e => new tbl_Employee
                         {
                             Name = e.Name,
-                            Address = e.Address,
                             tbl_Project = e.Projects.Select(p => new tbl_Project
                             {
                                 ProjectName = p.ProjectName
@@ -55,11 +58,9 @@ namespace OneToManyToMany.Controllers
 
                         db.Entry(department).State = System.Data.Entity.EntityState.Modified;
                     }
-
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
                 }
-                return View(model);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             return View("Error");
         }

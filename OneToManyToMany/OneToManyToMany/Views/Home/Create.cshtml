@@ -1,0 +1,180 @@
+﻿@model OneToManyToMany.Models.DepartmentViewModel
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Welcome</h1>
+
+@using (Html.BeginForm("Create", "Home", FormMethod.Post))
+{
+    <div class="department-List" id="departmentTable" data-template="DepartmentRow">
+        <a class="btn btn-success add-department">Add Department</a>
+    </div>
+    <div>
+        <input class="btn btn-success" type="submit" value="Submit" />
+    </div>
+}
+<textarea class="department-row" id="DepartmentRow" style="display:none;">
+    <div class="card departmentTable" id="departmentRow{v}">
+        <div class="card-body">
+            <label for="DepartmentName">Department Name :</label>
+            <input class="form-control" value="" name="Department[{v}].Name" placeholder="Department Name" />
+
+            <div class="employee-List" id="employeeTable_{v}" data-template="EmployeeRow" data-value1="{v}">
+                <a class="btn btn-success add-employee">A Emp</a>
+            </div>
+        </div>
+    </div>
+<script>
+    var GroupDepositAdd_randID = new dynAddRowEmployee('#employeeTable_{v}');
+
+</script>
+</textarea>
+
+<textarea class="employee-row" id="EmployeeRow" style="display:none;">
+    <div class="employeeTable" id="employeeRow_{v}_{i}">
+        <table class="table table-bordered" id="projectTable_{v}_{i}" data-template="ProjectRow" data-value="{v}" data-value1="{i}">
+            <thead>
+                <tr>
+                    <td><a class="btn btn-outline-success add-project">A P</a></td>
+                    <td>
+                        <input class="form-control" value="" name="Department[{v}].Employee[{i}].Name" placeholder="Employee Name" />
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+            </table>
+        </div>
+    <script>
+        var GroupDepositAdd_randID = new dynAddRowProject('#projectTable_{v}_{i}');
+    </script>
+</textarea>
+
+<textarea class="project-row" id="ProjectRow" style="display:none;">
+        <tr>
+            <td>Project Name</td>
+            <td>
+                <input class="form-control" value="" name="Department[{v}].Employee[{i}].Project[{j}].Name" placeholder="Project Name" />
+            </td>
+        </tr>   
+        <script>
+            var GroupDepositAdd_randID = new dynAddRowProject('#projectTable');
+        </script>
+</textarea>
+
+@Scripts.Render("~/bundles/jquery")
+
+<script>
+    function dynAddRowDepartment($tableSelector) {
+        //alert("add-row click3");
+        this.parentTable = $tableSelector;
+        this.tempate = $(this.parentTable).data('template');
+        // alert(this.tempate);
+        //this.evt = this.parentTable + '.add-row';
+
+        this.addRow = function (e) {
+            //alert("add-row click");
+            if (e) { e.preventDefault(); }
+            var $temp = $('#' + self.tempate).val();
+            if ($temp == undefined) { return; }
+            var totalRow = $(self.parentTable + ' .departmentTable').length;
+            $temp = $temp.replace(/{v}/g, totalRow);
+
+            var $table = $($tableSelector).append($temp);
+
+        };
+        this.removeRow = function (e) {
+            if (e) { e.preventDefault(); }
+            $(this).closest("tr").remove(); // remove row
+            return false;
+        };
+
+
+        var self = this;
+
+
+        $(document).on('click', self.parentTable + " .add-department", self.addRow);
+        $(document).on('click', self.parentTable + ' .remove-department', self.removeRow);
+    }
+    function dynAddRowEmployee($tableSelector) {
+        //alert("add-row click3");
+        this.parentTable = $tableSelector;
+        this.template = $(this.parentTable).data("template");
+        this.tempate = $(this.parentTable).data('template');
+        var count = $(this.parentTable).data('value1');
+        // alert(this.tempate);
+        this.evt = this.parentTable + ' .add-employee';
+
+        this.addRow = function (e) {
+            //alert("add-row click");
+            if (e) { e.preventDefault(); }
+            var $temp = $('#' + self.tempate).val();
+            if ($temp == undefined) { return; }
+            var totalRowDepartment = $(self.parentTable + ' .departmentTable').length;
+            var totalRowEmployee = $(self.parentTable + ' .employeeTable').length;
+            $temp = $temp.replace(/{v}/g, totalRowDepartment);
+            $temp = $temp.replace(/{i}/g, totalRowEmployee);
+            //$temp = $temp.replace(/{v}/g, count);
+
+
+            var $table = $($tableSelector).append($temp);
+
+        };
+        this.removeRow = function (e) {
+            if (e) { e.preventDefault(); }
+            $(this).closest("tr").remove(); // remove row
+            return false;
+        };
+
+
+        var self = this;
+
+
+        $(document).on('click', self.parentTable + " .add-employee", self.addRow);
+        $(document).on('click', self.parentTable + ' .remove-employee', self.removeRow);
+    }
+
+    function dynAddRowProject($tableSelector) {
+        //alert("add-row click3");
+        debugger;
+        this.parentTable = $tableSelector;
+        this.tempate = $(this.parentTable).data('template');
+        // alert(this.tempate);
+        this.evt = this.parentTable + '.add-project';
+
+        this.addRow = function (e) {
+            // alert("add-row click");
+            debugger;
+            if (e) { e.preventDefault(); }
+            var $temp = $('#' + self.tempate).val();
+            if ($temp == undefined) { return; }
+
+            var totalRowDepartment = $(self.parentTable + ' .departmentTable').length;
+            var totalRowEmployee = $(self.parentTable + ' .employeeTable').length;
+            var totalRowProject = $(self.parentTable + ' tbody tr').length;
+            $temp = $temp.replace(/{v}/g, totalRowDepartment);
+            $temp = $temp.replace(/{i}/g, totalRowEmployee);
+            $temp = $temp.replace(/{j}/g, totalRowProject);
+            //$temp = $temp.replace(/{v}/g, count);
+
+
+            var $table = $(self.parentTable + ' tbody').append('<tr>' + $temp + '</tr>');
+
+        };
+        this.removeRow = function (e) {
+            if (e) { e.preventDefault(); }
+            $(this).closest("tr").remove(); // remove row
+            return false;
+        };
+
+
+        var self = this;
+
+        $(document).on('click', self.parentTable + " .add-project", self.addRow);
+        $(document).on('click', self.parentTable + ' .remove-row', self.removeRow);
+
+    }
+    var GroupDepositAdd_randID = new dynAddRowDepartment('#departmentTable');
+
+</script>

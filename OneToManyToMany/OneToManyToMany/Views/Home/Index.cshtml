@@ -1,4 +1,4 @@
-﻿@model List<OneToManyToMany.Models.DepartmentViewModel>
+﻿@model OneToManyToMany.Models.DepartmentViewModel
 
 @{
     ViewBag.Title = "Home Page";
@@ -6,108 +6,227 @@
 
 <h1>Welcome</h1>
 
+@*@Html.ActionLink("Create", "Create", "Home")*@
+@using (Html.BeginForm("Create", "Home", FormMethod.Post))
+{
+    <div id="my-container" data-template="DepartmentRow" data-value1="1">
 
-<div id="my-container">
-    <div>
-        <button id="add-Department">Add Department</button>
-    </div>
-    <div id="departments">
 
-    </div>
-    <div class="department-row" style="display:none;">
-        <div>
-            @Html.LabelFor(m => m[0].Name)
-            @Html.TextBoxFor(m => m[0].Name, htmlAttributes: new { @class = "", @Name = "Department[0].Name", @id = "Department_0.Name", @data_value = "" })
-
+        @*<div>
+            <a class="btn btn-success btn-xs add-row" id="add-Department">Add Department</a>
+        </div>*@
+        <div class="department-row">
+            <h1>Department</h1>
+            <table id="departmentTable" class="table table-bordered" data-template="DepartmentRow" data-value1="1">
+                <thead>
+                    <tr>
+                        <th>Department Name</th>
+                        <th>
+                            <a class="btn btn-success btn-xs add-row" id="add-Department">Add Department</a>
+                            <a class="btn btn-danger btn-xs remove-row" id="remove-Department">remove</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
-        <button class="btn btn-danger" id="remove-Employee">remove</button>
-        <button id="add-Employee">Add Employee</button>
     </div>
+    <div class="col-md-1 pull-right m-5">
+        <input type="submit" value="Save" class="btn btn-success" />
+    </div>
+}
 
-<div class="employee-row" style="display:none;">
-    <div>
-        @Html.LabelFor(m => m[0].Employees[0].Name)
-        @Html.TextBoxFor(m => m[0].Employees[0].Name, htmlAttributes: new { @class = "", @Name = "Department[0].Employee[0].Name", @id = "", @data_value = "" })
-    </div>
-    <div>
-        @Html.LabelFor(m => m[0].Employees[0].Address)
-        @Html.TextBoxFor(m => m[0].Employees[0].Address, htmlAttributes: new { @class = "", @Name = "Department[0].Employee[0].Address", @id = "Employee_0.Address", @data_value = "" })
-    </div>     
-<button class="btn btn-danger" id="remove-Employee">remove</button>
-<button id="add-Project">Add Project</button>
-<table id="dynamicTable" class="table table-bordered" data-template="rowTemplate" data-value1="1">
-    <thead>
+<textarea class="department-row" id="DepartmentRow" style="display:none;">
     <tr>
-    <th>Project Name</th>
-     </tr>
-    </thead>
-    <tbody>
-    </tbody>
-</table>
-</div>
-<div class="project-row" style="display:none;">
-<tr>
-<td>@Html.TextBoxFor(m => m[0].Employees[0].Projects[0].ProjectName, htmlAttributes: new { @class = "", @Name = "Department[0].Name", @id = "Department_0.Name", @data_value = "" })</td>
+        <td>
+            <input class="form-control" value="" name="Department[d_{v}].Name" />
+        </td>
     </tr>
-<button class="btn btn-danger" id="remove-Project">remove</button>
-</div>
-</div>
+    <tr>
+        <td>
+            @*<a class="btn btn-success" id="add-Employee">Add Employee</a>*@
+             <table  class="table table-bordered" id="employeeTable" data-template="EmployeeRow" data-value1="{i}">
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Employee Address</th>
+                        <th>
+                            <a class="btn btn-success add-row" id="add-Employee">Add Employee</a>
+                            <a class="btn btn-danger remove-row" id="remove-Department">remove</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+             </table>
+            <!--<script>
+                var GroupDepositAdd_randID = new dynAddRow('#employeeTable_{e}');
+            </script>-->
+        </td>
+    </tr>
+ </textarea>
 
-<script src="/Scripts/jquery-3.4.1.js"></script>
+<textarea class="employee-row" id="EmployeeRow" style="display:none;">
+    <tr>
+        <td>
+            <input class="form-control" value="e_{i}" name="Department[d_{v}].Employee[e_{i}].Name" />
+        </td>
+        <td>
+            <input class="form-control" value="" name="Department[d_{v}].Employee[e_{i}].Address" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table class="table table-bordered" data-template="ProjectRow" data-value1="{p}">
+                <thead>
+                    <tr>
+                        <th>Project Name</th>
+                        <th>
+                            <a class="btn btn-success add-row" id="add-Project">Add Project</a>
+                            <a class="btn btn-danger remove-row" id="remove-Project">remove</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+<!--<script>
+    var GroupDepositAdd_randID = new dynAddRow('#projectTable_{p}');
+</script>-->
+</textarea>
+
+<textarea class="project-row" style="display:none;">
+    <tr>
+        <td>
+            <input class="form-control" value="e_{i}" name="Department[d_{v}].Employee[e_{i}].Project[p_{j}].Name" />
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button class="btn btn-danger remove-row" id="remove-Project">remove</button>
+        </td>
+    </tr>
+</textarea>
+
+@*<script src="/Scripts/jquery-3.4.1.js"></script>
+
+    <script>
+
+    </script>*@
+@Scripts.Render("~/bundles/jquery")
+
+
 <script>
-     $(document).ready(function () {
-        var depIndex = 0;
-         var empIndex = 0;
-         var projectIndex = 0;
-        //Add department
-        $(document).on('click', '#add-Department',function () {
+    function dynAddRow($tableSelector) {
+       // alert("add-row click3");
+        debugger;
+        this.parentTable = $tableSelector;
+        this.tempate = $(this.parentTable).data('template');
+        var count = $(this.parentTable).data('value1');
+        // alert(this.tempate);
+        this.evt = this.parentTable + '.add-row';
 
-            var newDepartment = $('.department-row').clone();
+        this.addRow = function (e) {
+            //alert("add-row click");
+            debugger;
+            if (e) { e.preventDefault(); }
+            var $temp = $('#' + self.tempate).val();
+            if ($temp == undefined) { return; }
+            var totalRow = $(self.parentTable + ' tbody tr').length;
+            $temp = $temp.replace(/{i}/g, totalRow);
+            $temp = $temp.replace(/{v}/g, count);
 
-            newDepartment.show();
 
-            newDepartment.find('input[name="Department[0].Name"]').attr('name', 'Department[' + depIndex + '].Name');
+            var $table = $(self.parentTable + ' tbody').append('<tr>' + $temp + '</tr>');
 
-            $('#departments').append(newDepartment);
 
-           depIndex++;
-        });
-        //remove department
-        $(document).on('click', '#remove-Department', function () {
-            $(this).closest('.department-row').remove();
-        });
-        //Add employee
-         $(document).on('click', '#add-Employee',function () {
 
-            var newEmployee = $('.employee-row').clone();
+        };
+        this.removeRow = function (e) {
+            if (e) { e.preventDefault(); }
+            $(this).closest("tr").remove(); // remove row
+            return false;
+        };
 
-            newEmployee.show();
 
-            newEmployee.find('input[name="Department[0].Employee[0].Name"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Name');
-            newEmployee.find('input[name="Department[0].Employee[0].Address"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Address');
+        var self = this;
 
-            $('.department-row').append(newEmployee);
 
-            empIndex++;
-         });
-          //remove employee
-    $(document).on('click', '#remove-Employee',function () {
-        $(this).closest('.employee-row').remove();
-    });
-    //Add project
-         $(document).on('click', "#add-Project", function () {
-            var newProject = $('.project-row').clone();
-            newProject.show();
-            newProject.find('input[name="Department[0].Employees[0].Projects[0].ProjectName"]').attr('name', 'Department[' + depIndex + '].Employees[' + empIndex + '].Projects[' + projectIndex + '].ProjectName');
-            $('.employee-row').append(newProject);
-            projectIndex++;
-        });
-        $(document).on('click', '#remove-Project', function () {
-            $(this).closest('.project-row').remove();
-        });
-    });
+        $(document).on('click', self.parentTable + " .add-row", self.addRow);
+        $(document).on('click', self.parentTable + ' .remove-row', self.removeRow);
 
-/*      var self = this;
-        $(document).on('click', "#add-Employee", self.addRow);
-        $(document).on('click', "#remove-Employee", self.removeRow);*/
+    }
+
+    var GroupDepositAdd_randID = new dynAddRow('#departmentTable');
+    var GroupDepositAdd_randID = new dynAddRow('#employeeTable');
+    var GroupDepositAdd_randID = new dynAddRow('#projectTable');
+
+
+
 </script>
+
+@*<script>
+        /*$(document).ready(function () {
+            var depIndex = $('.department-row').length;;
+            var empIndex = 0;
+            var projectIndex = 0;
+            //index
+            //Add department
+            $(document).on('click', '#add-Department', function () {
+
+                var newDepartment = $('.department-row').clone();
+
+                newDepartment.show();
+
+                newDepartment.find('input[name="Department[0].Name"]').attr('name', 'Department[' + depIndex + '].Name');
+
+                $('#departments').append(newDepartment);
+                //update index
+                var totalRow = $('.department-row').length;
+                depIndex = depIndex.replace(/{d}/g, totalRow);
+
+                //depIndex++;
+            });
+            //remove department
+            $(document).on('click', '#remove-Department', function () {
+                $(this).closest('.department-row').remove();
+                depIndex--;
+            });
+            //Add employee
+            $(document).on('click', '#add-Employee', function () {
+
+                var newEmployee = $('.employee-row').clone();
+
+                newEmployee.show();
+
+                newEmployee.find('input[name="Department[0].Employee[0].Name"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Name');
+                newEmployee.find('input[name="Department[0].Employee[0].Address"]').attr('name', 'Department[' + depIndex + '].Employee[' + empIndex + '].Address');
+
+                $('.department-row').append(newEmployee);
+
+                empIndex++;
+            });
+            //remove employee
+            $(document).on('click', '#remove-Employee', function () {
+                $(this).closest('.employee-row').remove();
+            });
+            //Add project
+            $(document).on('click', "#add-Project", function () {
+                var newProject = $('.project-row').clone();
+                newProject.show();
+                newProject.find('input[name="Department[0].Employees[0].Projects[0].ProjectName"]').attr('name', 'Department[' + depIndex + '].Employees[' + empIndex + '].Projects[' + projectIndex + '].ProjectName');
+                $('.employee-row').append(newProject);
+                projectIndex++;
+            });
+            $(document).on('click', '#remove-Project', function () {
+                $(this).closest('.project-row').remove();
+            });
+        });*/
+
+        /*      var self = this;
+                $(document).on('click', "#add-Employee", self.addRow);
+                $(document).on('click', "#remove-Employee", self.removeRow);*/
+    </script>*@
